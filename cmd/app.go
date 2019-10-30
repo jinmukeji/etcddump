@@ -18,7 +18,7 @@ func NewApp() *cli.App {
 	app.Usage = appUsage
 	app.Version = version
 	app.Authors = []cli.Author{
-		cli.Author{
+		{
 			Name:  "Sky Jia",
 			Email: "me@skyjia.com",
 		},
