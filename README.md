@@ -6,6 +6,7 @@
 [![LICENSE](https://img.shields.io/github/license/jinmukeji/etcddump.svg?style=flat-square)](https://github.com/jinmukeji/etcddump/blob/master/LICENSE)
 
 
+A tool used to dump / restore etcd KV.
 
 ### Install
 
