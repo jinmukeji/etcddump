@@ -14,6 +14,8 @@ A tool used to dump / restore etcd KV.
 go get github.com/jinmukeji/etcddump
 ```
 
+Or download a compiled version at [Release](https://github.com/jinmukeji/etcddump/releases) page
+
 ### Usage
 
 ```sh
