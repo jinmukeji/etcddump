@@ -14,8 +14,8 @@ import (
 )
 
 const (
-	DefaultPrefix      = "/"
-	DefaultEtcdAddress = "localhost:2379"
+	defaultPrefix      = "/"
+	defaultEtcdAddress = "localhost:2379"
 )
 
 func dumpCmd() cli.Command {
@@ -27,13 +27,13 @@ func dumpCmd() cli.Command {
 			cli.StringFlag{
 				Name:     "address, a",
 				Usage:    "etcd address",
-				Value:    DefaultEtcdAddress,
+				Value:    defaultEtcdAddress,
 				Required: false,
 			},
 			cli.StringFlag{
 				Name:     "prefix, p",
 				Usage:    "key prefix",
-				Value:    DefaultPrefix,
+				Value:    defaultPrefix,
 				Required: false,
 			},
 			cli.StringFlag{
@@ -50,8 +50,8 @@ func dumpCmd() cli.Command {
 	}
 }
 
-type KVData = []byte
-type DumpData = []KVData
+type kvData = []byte
+type dumpData = []kvData
 
 func dumpAction(c *cli.Context) error {
 	address := c.String("address")
@@ -81,7 +81,7 @@ func dumpAction(c *cli.Context) error {
 	return nil
 }
 
-func dump(addr, prefix string, print bool) (DumpData, error) {
+func dump(addr, prefix string, print bool) (dumpData, error) {
 	cli, err := clientv3.New(clientv3.Config{
 		Endpoints:   []string{addr},
 		DialTimeout: 5 * time.Second,
@@ -98,7 +98,7 @@ func dump(addr, prefix string, print bool) (DumpData, error) {
 		return nil, err
 	}
 
-	dd := make(DumpData, 0)
+	dd := make(dumpData, 0)
 
 	for _, kv := range rsp.Kvs {
 		b, err := kv.Marshal()
@@ -117,7 +117,7 @@ func dump(addr, prefix string, print bool) (DumpData, error) {
 	return dd, nil
 }
 
-func writeDumpData(filename string, d DumpData) error {
+func writeDumpData(filename string, d dumpData) error {
 	var buffer bytes.Buffer
 	enc := gob.NewEncoder(&buffer)
 	err := enc.Encode(d)

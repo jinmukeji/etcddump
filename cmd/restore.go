@@ -24,7 +24,7 @@ func restoreCmd() cli.Command {
 			cli.StringFlag{
 				Name:     "address, a",
 				Usage:    "etcd address",
-				Value:    DefaultEtcdAddress,
+				Value:    defaultEtcdAddress,
 				Required: false,
 			},
 			cli.StringFlag{
@@ -94,13 +94,13 @@ func restore(addr, filename string, print bool) error {
 	return nil
 }
 
-func readDumpData(filename string) (DumpData, error) {
+func readDumpData(filename string) (dumpData, error) {
 	b, err := ioutil.ReadFile(filename)
 	if err != nil {
 		return nil, err
 	}
 
-	dd := make(DumpData, 0)
+	dd := make(dumpData, 0)
 
 	var buffer bytes.Buffer
 	buffer.Write(b)
