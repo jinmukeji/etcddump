@@ -1,7 +1,7 @@
 # etcddump
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/jinmukeji/etcddump?style=flat-square)](https://goreportcard.com/report/github.com/jinmukeji/etcddump)
-[![Godoc](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)](https://godoc.org/jinmukeji/etcddump)
+[![Godoc](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)](https://godoc.org/github.com/jinmukeji/etcddump)
 [![Releases](https://img.shields.io/github/release/jinmukeji/etcddump/all.svg?style=flat-square)](https://github.com/jinmukeji/etcddump/releases)
 [![LICENSE](https://img.shields.io/github/license/jinmukeji/etcddump.svg?style=flat-square)](https://github.com/jinmukeji/etcddump/blob/master/LICENSE)
 
