@@ -51,13 +51,6 @@ archives:
       windows: Windows
       386: i386
       amd64: x86_64
-blobs:
-  -
-    provider: s3
-    bucket: res.jinmuhealth.com
-    ids:
-      - etcddump
-    folder: "download/tools/{{ .ProjectName }}/{{ .Tag }}"
 checksum:
   name_template: "checksums.txt"
 snapshot:
