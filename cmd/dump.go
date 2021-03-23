@@ -6,7 +6,7 @@ import (
 	"encoding/gob"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"os"
 	"time"
 
 	"github.com/urfave/cli"
@@ -126,7 +126,7 @@ func writeDumpData(filename string, d dumpData) error {
 	}
 
 	b := buffer.Bytes()
-	err = ioutil.WriteFile(filename, b, 0644)
+	err = os.WriteFile(filename, b, 0644)
 	if err != nil {
 		return err
 	}

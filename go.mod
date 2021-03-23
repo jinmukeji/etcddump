@@ -1,6 +1,6 @@
 module github.com/jinmukeji/etcddump
 
-go 1.13
+go 1.16
 
 require (
 	github.com/coreos/bbolt v1.3.3 // indirect
@@ -23,7 +23,6 @@ require (
 	github.com/tmc/grpc-websocket-proxy v0.0.0-20190109142713-0ad062ec5ee5 // indirect
 	github.com/urfave/cli v1.22.1
 	github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2 // indirect
-	go.etcd.io/bbolt v1.3.3 // indirect
 	go.etcd.io/etcd v3.3.17+incompatible
 	go.uber.org/zap v1.12.0 // indirect
 	golang.org/x/crypto v0.0.0-20191029031824-8986dd9e96cf // indirect

@@ -6,7 +6,7 @@ import (
 	"encoding/gob"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"os"
 	"time"
 
 	"github.com/urfave/cli"
@@ -95,7 +95,7 @@ func restore(addr, filename string, print bool) error {
 }
 
 func readDumpData(filename string) (dumpData, error) {
-	b, err := ioutil.ReadFile(filename)
+	b, err := os.ReadFile(filename)
 	if err != nil {
 		return nil, err
 	}
