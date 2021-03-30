@@ -1,10 +1,11 @@
 SOURCE_FILES?=./...
 
 export PATH := ./bin:$(PATH)
-export GO111MODULE := on
 export GOPATH := $(shell go env GOPATH)
+export GO111MODULE := on
 export GOPROXY := https://goproxy.io,direct
 export GOPRIVATE := github.com/jinmukeji/*
+
 export GOVERSION := $(shell go version | awk '{print $$3}')
 # GORELEASER is the path to the goreleaser binary.
 export GORELEASER := $(shell which goreleaser)
@@ -13,30 +14,35 @@ export GORELEASER := $(shell which goreleaser)
 all: release
 .PHONY: all
 
-# Install all the build and lint dependencies
+# Install all the tools and dependencies"
 setup:
-	# TODO: 官方 golangci-lint 发行包不兼容 go 1.13，需要使用手动编译的版本
-	#curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh
-	GO111MODULE=off go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
-	[ -d "./bin" ] || mkdir -p ./bin
-	cp $(GOPATH)/bin/golangci-lint ./bin/
-	# curl -L https://git.io/misspell | sh
-	go mod download
+	[ -x "$(GORELEASER)" ] || ( brew update && brew install goreleaser/tap/goreleaser )
+	# golangci-lint
+	brew install golangci-lint
 .PHONY: setup
 
+
 # Update go packages
-go-update:
+go-mod-update:
+	@echo "Checking updated go packages..."
+	@go list -u -m all
 	@echo "Updating go packages..."
-	@go get -u all
-	@echo "go mod tidy..."
+	@go get -u -t ./...
 	@$(MAKE) go-mod-tidy
 .PHONY: go-update
 
 # Clean go.mod
 go-mod-tidy:
 	@go mod tidy -v
-	# @git --no-pager diff HEAD
-	# @git --no-pager diff-index --quiet HEAD
+	# git --no-pager diff HEAD
+	# git --no-pager diff-index --quiet HEAD
+.PHONY: go-mod-tidy
+
+# Reset go.mod
+go-mod-reset:
+	@rm -f go.sum
+	@sed -i '' -e '/^require/,/^)/d' go.mod
+	@go mod tidy -v
 .PHONY: go-mod-tidy
 
 generate:
@@ -50,7 +56,7 @@ format:
 
 # Run all the linters
 lint:
-	@./bin/golangci-lint run
+	@golangci-lint run
 .PHONY: lint
 
 # Go build all
@@ -60,7 +66,7 @@ build:
 
 # Go test all
 test:
-	@go test -v ./...
+	@go test ./...
 .PHONY: test
 
 # Run all code checks
